@@ -161,7 +161,7 @@ export default function Home() {
       >
         {/* Purple wave background */}
         <div className="absolute inset-0 z-0">
-          <Image src="/images/purple-wave.jpeg" alt="Background" fill className="object-cover opacity-40" priority />
+          <Image src="/images/purple-wave.gif" alt="Background" fill className="object-cover opacity-40" priority />
         </div>
 
         {/* Animated gradient background */}
