@@ -53,15 +53,15 @@ export default function Home() {
     }>
   >([])
 
-  // Generate floating particles
+  // Generate floating particles - reduced from 20 to 8 particles
   useEffect(() => {
-    const newParticles = Array.from({ length: 20 }, (_, i) => ({
+    const newParticles = Array.from({ length: 8 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      size: Math.random() * 6 + 2,
-      color: `rgba(${Math.random() * 100 + 155}, ${Math.random() * 100 + 100}, ${Math.random() * 155 + 100}, ${Math.random() * 0.5 + 0.1})`,
-      delay: Math.random() * 5,
+      size: Math.random() * 4 + 2, // Reduced max size
+      color: `rgba(${Math.random() * 100 + 155}, ${Math.random() * 100 + 100}, ${Math.random() * 155 + 100}, ${Math.random() * 0.3 + 0.1})`, // Reduced opacity
+      delay: Math.random() * 3, // Reduced delay
     }))
     setParticles(newParticles)
   }, [])
@@ -108,7 +108,7 @@ export default function Home() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center max-w-7xl">
           <motion.div
             className="flex items-center"
             whileHover={{ scale: 1.05 }}
@@ -117,7 +117,7 @@ export default function Home() {
             <Image src="/images/neocut-logo.png" alt="NeoCut Logo" width={120} height={60} className="h-10 w-auto" />
           </motion.div>
           <nav className="hidden md:flex items-center gap-8">
-            {["How It Works", "Features", "Pricing", "Try It", "Login"].map((item, index) => (
+            {["How It Works", "Features", "Pricing", "Join Waitlist"].map((item, index) => (
               <motion.div
                 key={item}
                 initial={{ opacity: 0, y: -20 }}
@@ -138,7 +138,7 @@ export default function Home() {
             className="hidden md:flex shadow-[0_0_15px_rgba(159,122,234,0.5)]"
             glowColor="rgba(159, 122, 234, 0.7)"
           >
-            Get Started Free
+            Join Waitlist
           </GlowButton>
           <motion.button className="md:hidden text-white" whileTap={{ scale: 0.95 }}>
             <svg
@@ -157,37 +157,23 @@ export default function Home() {
       {/* Hero Section */}
       <section
         ref={heroRef}
-        className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden min-h-screen flex items-center"
+        className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden min-h-screen flex items-center justify-center"
       >
-        {/* Purple wave background */}
-        <div className="absolute inset-0 z-0">
-          <Image src="/images/purple-wave.gif" alt="Background" fill className="object-cover opacity-40" priority />
-        </div>
+        {/* Removed purple wave background */}
 
-        {/* Animated gradient background */}
-        <AnimatedGradientBackground className="opacity-30" />
+        {/* Simplified gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0D0D0D] via-[#120D1E] to-[#0D0D0D] opacity-50"></div>
 
-        {/* Floating orbs */}
+        {/* Reduced floating orbs to just one */}
         <FloatingElement
-          className="absolute top-1/4 left-1/4 w-[300px] h-[300px] rounded-full bg-purple-600/10 blur-3xl"
-          yOffset={20}
-          duration={6}
-        />
-        <FloatingElement
-          className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-blue-600/10 blur-3xl"
-          yOffset={30}
+          className="absolute top-1/4 left-1/4 w-[300px] h-[300px] rounded-full bg-purple-600/5 blur-2xl"
+          yOffset={10}
           duration={8}
-          delay={1}
-        />
-        <FloatingElement
-          className="absolute top-1/2 right-1/3 w-[200px] h-[200px] rounded-full bg-pink-600/10 blur-3xl"
-          yOffset={15}
-          xOffset={10}
-          duration={5}
-          delay={0.5}
-        />
+        >
+          <div />
+        </FloatingElement>
 
-        <motion.div className="container mx-auto px-4 relative z-10" style={{ y: heroY, opacity: heroOpacity }}>
+        <motion.div className="container mx-auto px-6 relative z-10 max-w-7xl" style={{ y: heroY, opacity: heroOpacity }}>
           <div className="max-w-4xl mx-auto text-center mb-12">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -207,7 +193,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              NeoCut turns your words into precise edits — instantly, locally, and without a timeline.
+              NeoCut will turn your words into precise edits — instantly, locally, and without a timeline. Coming soon.
             </motion.p>
 
             <motion.div
@@ -217,7 +203,7 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               <GlowButton className="shadow-[0_0_25px_rgba(159,122,234,0.5)]" glowColor="rgba(159, 122, 234, 0.7)">
-                Try the Demo
+                Join Waitlist
               </GlowButton>
 
               <GlowButton
@@ -226,7 +212,7 @@ export default function Home() {
                 glowColor="rgba(159, 122, 234, 0.4)"
                 icon={<Play size={18} />}
               >
-                Watch 1-min Video
+                Watch Preview
               </GlowButton>
             </motion.div>
           </div>
@@ -245,6 +231,7 @@ export default function Home() {
                   alt="NeoCut Interface"
                   width={1200}
                   height={675}
+                  priority
                   className="w-full h-auto rounded-xl"
                 />
 
@@ -336,10 +323,7 @@ export default function Home() {
 
       {/* How It Works */}
       <section id="how-it-works" className="py-20 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0D0D0D] via-[#120D1E] to-[#0D0D0D] z-0"></div>
-        <AnimatedGradientBackground className="opacity-20" />
-
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-6 relative z-10 max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -406,7 +390,7 @@ export default function Home() {
 
           {/* Process flow */}
           <motion.div
-            className="max-w-5xl mx-auto mt-20 relative"
+            className="max-w-5xl mx-auto mt-20 relative px-4"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
@@ -438,10 +422,7 @@ export default function Home() {
 
       {/* Live Demo */}
       <section id="try-it" className="py-20 relative">
-        <div className="absolute top-1/2 right-1/4 w-[400px] h-[400px] rounded-full bg-purple-600/10 blur-3xl"></div>
-        <AnimatedGradientBackground className="opacity-20" />
-
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-6 relative z-10 max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -451,10 +432,13 @@ export default function Home() {
           >
             <h2 className="text-3xl md:text-5xl font-bold inline-block">
               <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-                Try It Yourself
+                See It In Action
               </span>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mt-4 rounded-full"></div>
+            <p className="text-xl text-gray-300 mt-6 max-w-2xl mx-auto">
+              A preview of what's coming
+            </p>
           </motion.div>
 
           <motion.div
@@ -592,18 +576,18 @@ export default function Home() {
 
           {/* Quick actions */}
           <motion.div
-            className="max-w-4xl mx-auto mt-10 flex flex-wrap justify-center gap-3"
+            className="max-w-4xl mx-auto mt-10 flex flex-wrap justify-center gap-3 px-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true, amount: 0.3 }}
           >
             {[
-              "Trim first 5 seconds",
-              "Add cinematic effect",
-              "Increase brightness",
-              "Add subtitles",
-              "Remove background noise",
+              "Coming soon: Trim with chat",
+              "Future: AI effects",
+              "Planned: Smart editing",
+              "Upcoming: Auto subtitles",
+              "Launching: Noise removal",
             ].map((action, index) => (
               <motion.div
                 key={action}
@@ -624,12 +608,7 @@ export default function Home() {
 
       {/* Competitive Advantage - Enhanced Version */}
       <section id="features" className="py-20 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0D0D0D] via-[#120D1E] to-[#0D0D0D] z-0"></div>
-        <div className="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full bg-purple-600/10 blur-3xl"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] rounded-full bg-blue-600/10 blur-3xl"></div>
-        <AnimatedGradientBackground className="opacity-20" />
-
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-6 relative z-10 max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -903,10 +882,7 @@ export default function Home() {
 
       {/* Comparison Table */}
       <section className="py-20 relative">
-        <div className="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full bg-blue-600/10 blur-3xl"></div>
-        <AnimatedGradientBackground className="opacity-20" />
-
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-6 relative z-10 max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1060,11 +1036,7 @@ export default function Home() {
 
       {/* Testimonials */}
       <section className="py-20 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0D0D0D] via-[#120D1E] to-[#0D0D0D] z-0"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] rounded-full bg-purple-600/10 blur-3xl"></div>
-        <AnimatedGradientBackground className="opacity-20" />
-
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-6 relative z-10 max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1078,24 +1050,27 @@ export default function Home() {
               </span>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mt-4 rounded-full"></div>
+            <p className="text-xl text-gray-300 mt-6 max-w-2xl mx-auto">
+              Early feedback from our beta testers
+            </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto items-stretch">
             {[
               {
-                quote: "I cut my YouTube videos 5x faster with NeoCut. It's like magic.",
+                quote: "I can't wait to cut my YouTube videos 5x faster with NeoCut. The preview looks amazing!",
                 author: "@editingmom",
                 avatar: "/placeholder.svg?height=50&width=50",
                 stars: 5,
               },
               {
-                quote: "No more wasting hours on complex timelines. Just tell NeoCut what you want and it's done.",
+                quote: "The concept is revolutionary. No more wasting hours on complex timelines - just tell it what you want!",
                 author: "@techreviewer",
                 avatar: "/placeholder.svg?height=50&width=50",
                 stars: 5,
               },
               {
-                quote: "As a content creator, NeoCut has completely changed my workflow. Highly recommend!",
+                quote: "As a content creator, I'm excited to try NeoCut when it launches. The waitlist is worth it!",
                 author: "@contentcreator",
                 avatar: "/placeholder.svg?height=50&width=50",
                 stars: 5,
@@ -1144,10 +1119,7 @@ export default function Home() {
 
       {/* Pricing */}
       <section id="pricing" className="py-20 relative">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-r from-purple-900/10 to-blue-900/10 blur-3xl opacity-50"></div>
-        <AnimatedGradientBackground className="opacity-20" />
-
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-6 relative z-10 max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1157,11 +1129,13 @@ export default function Home() {
           >
             <h2 className="text-3xl md:text-5xl font-bold inline-block">
               <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-                Simple Pricing
+                Future Pricing
               </span>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mt-4 rounded-full"></div>
-            <p className="text-xl text-gray-300 mt-6 max-w-2xl mx-auto">Choose the plan that works for you</p>
+            <p className="text-xl text-gray-300 mt-6 max-w-2xl mx-auto">
+              Planned pricing tiers for when we launch
+            </p>
           </motion.div>
 
           <motion.div
@@ -1177,7 +1151,7 @@ export default function Home() {
             </div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto items-stretch">
             {[
               {
                 name: "Starter",
@@ -1270,7 +1244,7 @@ export default function Home() {
                       } rounded-lg py-2`}
                       variant={plan.popular ? "default" : "secondary"}
                     >
-                      {plan.price === "Free" ? "Start Free" : "Choose Plan"}
+                      {plan.price === "Free" ? "Join Waitlist" : "Join Waitlist"}
                     </GlowButton>
                   </div>
                 </ParallaxTilt>
@@ -1282,10 +1256,7 @@ export default function Home() {
 
       {/* CTA */}
       <section className="py-20 relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-blue-900/20 blur-3xl opacity-50"></div>
-        <AnimatedGradientBackground className="opacity-30" />
-
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-6 relative z-10 max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1303,7 +1274,7 @@ export default function Home() {
                     transition={{ duration: 0.5 }}
                     viewport={{ once: true, amount: 0.3 }}
                   >
-                    Ready to edit videos without the hassle?
+                    Ready to revolutionize your video editing?
                   </motion.h2>
                   <motion.p
                     className="text-xl text-gray-300 mb-8"
@@ -1312,7 +1283,7 @@ export default function Home() {
                     transition={{ duration: 0.5, delay: 0.1 }}
                     viewport={{ once: true, amount: 0.3 }}
                   >
-                    Start using NeoCut for free.
+                    Join our waitlist to be notified when we launch.
                   </motion.p>
                   <motion.div
                     className="flex flex-col sm:flex-row gap-4 justify-center"
@@ -1321,8 +1292,8 @@ export default function Home() {
                     transition={{ duration: 0.5, delay: 0.2 }}
                     viewport={{ once: true, amount: 0.3 }}
                   >
-                    <GlowButton className="shadow-[0_0_25px_rgba(159,122,234,0.5)]">Get Started</GlowButton>
-                    <GlowButton variant="outline">Try the Demo</GlowButton>
+                    <GlowButton className="shadow-[0_0_25px_rgba(159,122,234,0.5)]">Join Waitlist</GlowButton>
+                    <GlowButton variant="outline">Watch Preview</GlowButton>
                   </motion.div>
                 </div>
               </div>
@@ -1333,9 +1304,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="py-12 border-t border-gray-800 relative">
-        <AnimatedGradientBackground className="opacity-10" />
-
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-6 relative z-10 max-w-7xl">
           <div className="flex flex-col md:flex-row justify-between items-center mb-8">
             <motion.div
               className="mb-6 md:mb-0"
@@ -1416,7 +1385,7 @@ export default function Home() {
           </div>
 
           <motion.div
-            className="flex flex-col md:flex-row justify-center gap-8 mt-8"
+            className="flex flex-col md:flex-row justify-center gap-8 mt-8 items-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
