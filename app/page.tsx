@@ -125,7 +125,7 @@ export default function Home() {
                 transition={{ duration: 0.3, delay: 0.1 * index }}
               >
                 <Link
-                  href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
+                  href={item === "Join Waitlist" ? "#join-waitlist" : `#${item.toLowerCase().replace(/\s+/g, "-")}`}
                   className="text-sm text-gray-300 hover:text-white transition relative group"
                 >
                   {item}
@@ -134,12 +134,14 @@ export default function Home() {
               </motion.div>
             ))}
           </nav>
-          <GlowButton
-            className="hidden md:flex shadow-[0_0_15px_rgba(159,122,234,0.5)]"
-            glowColor="rgba(159, 122, 234, 0.7)"
-          >
-            Join Waitlist
-          </GlowButton>
+          <Link href="#join-waitlist" className="hidden md:flex">
+            <GlowButton
+              className="shadow-[0_0_15px_rgba(159,122,234,0.5)]"
+              glowColor="rgba(159, 122, 234, 0.7)"
+            >
+              Join Waitlist
+            </GlowButton>
+          </Link>
           <motion.button className="md:hidden text-white" whileTap={{ scale: 0.95 }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -202,18 +204,11 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              <GlowButton className="shadow-[0_0_25px_rgba(159,122,234,0.5)]" glowColor="rgba(159, 122, 234, 0.7)">
-                Join Waitlist
-              </GlowButton>
-
-              <GlowButton
-                variant="outline"
-                className="flex items-center gap-2"
-                glowColor="rgba(159, 122, 234, 0.4)"
-                icon={<Play size={18} />}
-              >
-                Watch Preview
-              </GlowButton>
+              <Link href="#join-waitlist">
+                <GlowButton className="shadow-[0_0_25px_rgba(159,122,234,0.5)]" glowColor="rgba(159, 122, 234, 0.7)">
+                  Join Waitlist
+                </GlowButton>
+              </Link>
             </motion.div>
           </div>
 
@@ -1218,16 +1213,17 @@ export default function Home() {
                       ))}
                     </ul>
 
-                    <GlowButton
-                      className={`w-full ${
-                        plan.popular
-                          ? "shadow-[0_0_15px_rgba(159,122,234,0.5)]"
-                          : "bg-gray-800 text-white hover:bg-gray-700"
-                      } rounded-lg py-2`}
-                      variant={plan.popular ? "default" : "secondary"}
+                    <motion.div
+                      className="flex flex-col sm:flex-row gap-4 justify-center"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                      viewport={{ once: true, amount: 0.3 }}
                     >
-                      {plan.price === "Free" ? "Join Waitlist" : "Join Waitlist"}
-                    </GlowButton>
+                      <Link href="#join-waitlist">
+                        <GlowButton className="shadow-[0_0_25px_rgba(159,122,234,0.5)]">Join Waitlist</GlowButton>
+                      </Link>
+                    </motion.div>
                   </div>
                 </ParallaxTilt>
               </motion.div>
@@ -1237,7 +1233,7 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 relative">
+      <section id="join-waitlist" className="py-20 relative">
         <div className="container mx-auto px-6 relative z-10 max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
