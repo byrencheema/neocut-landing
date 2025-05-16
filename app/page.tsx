@@ -301,24 +301,6 @@ export default function Home() {
             </FloatingElement>
           </motion.div>
         </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-        >
-          <div className="flex flex-col items-center">
-            <span className="text-sm text-gray-400 mb-2">Scroll to explore</span>
-            <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center pt-2">
-              <motion.div
-                className="w-1.5 h-1.5 bg-white rounded-full"
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-              />
-            </div>
-          </div>
-        </motion.div>
       </section>
 
       {/* How It Works */}
@@ -1263,41 +1245,20 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true, amount: 0.3 }}
           >
-            <ParallaxTilt>
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-pink-600/20 to-blue-600/20 rounded-xl blur-xl -z-10"></div>
-                <div className="max-w-4xl mx-auto text-center bg-gray-900/30 backdrop-blur-sm border border-purple-500/20 rounded-xl p-12 shadow-[0_0_30px_rgba(159,122,234,0.3)]">
-                  <motion.h2
-                    className="text-3xl md:text-5xl font-bold mb-6"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                  >
-                    Ready to revolutionize your video editing?
-                  </motion.h2>
-                  <motion.p
-                    className="text-xl text-gray-300 mb-8"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                  >
-                    Join our waitlist to be notified when we launch.
-                  </motion.p>
-                  <motion.div
-                    className="flex flex-col sm:flex-row gap-4 justify-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                  >
-                    <GlowButton className="shadow-[0_0_25px_rgba(159,122,234,0.5)]">Join Waitlist</GlowButton>
-                    <GlowButton variant="outline">Watch Preview</GlowButton>
-                  </motion.div>
-                </div>
-              </div>
-            </ParallaxTilt>
+            <div className="max-w-2xl mx-auto text-center bg-purple-900/20 border border-purple-500/30 rounded-xl p-12">
+              <motion.h2
+                className="text-3xl md:text-5xl font-bold mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true, amount: 0.3 }}
+              >
+                Ready to revolutionize your video editing?
+              </motion.h2>
+              <div id="getWaitlistContainer" data-waitlist_id="28401" data-widget_type="WIDGET_3"></div>
+              <link rel="stylesheet" type="text/css" href="https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.css"/>
+              <script src="https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.js"></script>
+            </div>
           </motion.div>
         </div>
       </section>
